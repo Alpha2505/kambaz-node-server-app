@@ -71,8 +71,8 @@ const sessionOptions = {
   cookie: {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24, // 24 hours
-    secure: process.env.NODE_ENV === "production", 
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax" 
+    secure: process.env.SERVER_ENV === "production", 
+    sameSite: process.env.SERVER_ENV === "production" ? "none" : "lax" 
   }
 };
 
@@ -90,6 +90,6 @@ Hello(app);
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV}`);
-  console.log(`Secure cookies: ${process.env.NODE_ENV === "production"}`);
+  console.log(`Environment: ${process.env.SERVER_ENV}`);
+  console.log(`Secure cookies: ${process.env.SERVER_ENV === "production"}`);
 });
