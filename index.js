@@ -12,7 +12,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import "dotenv/config";
 
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://localhost:27017/Kambaz";
+const CONNECTION_STRING = process.env.DATABASE_CONNECTION_STRING || "mongodb://localhost:27017/Kambaz";
 mongoose.connect(CONNECTION_STRING);
 
 mongoose.connection.on('connected', () => {
@@ -33,7 +33,7 @@ app.use(
     origin: function (origin, callback) {
       const allowedOrigins = [
         "http://localhost:3000",
-        process.env.FRONTEND_URL,
+        process.env.CLIENT_URL,
         /https:\/\/kambaz-next-js.*\.vercel\.app$/ // Allow all Vercel preview URLs
       ];
       
@@ -60,7 +60,7 @@ app.use(express.json());
 
 // Session configuration
 const sessionOptions = {
-  secret: process.env.SESSION_SECRET || "kambaz",
+  secret: process.env.SESSION_SECRET || "super secret session phrase",
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
@@ -71,8 +71,8 @@ const sessionOptions = {
   cookie: {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24, // 24 hours
-    secure: process.env.NODE_ENV === "production", // true in production
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax" // 'none' for cross-origin
+    secure: process.env.SERVER_ENV === "production", // true in production
+    sameSite: process.env.SERVER_ENV === "production" ? "none" : "lax" // 'none' for cross-origin
   }
 };
 
