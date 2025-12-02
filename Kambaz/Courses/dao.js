@@ -3,7 +3,7 @@ import enrollmentModel from "../Enrollments/model.js";
 import { v4 as uuidv4 } from "uuid";
 export default function CoursesDao() {
   async function findAllCourses() {
-      return await model.find({}, { name: 1, description: 1 });
+      return await model.find();
   }
   async function createCourse(course) {
   const newCourse = { ...course, _id: uuidv4() };
