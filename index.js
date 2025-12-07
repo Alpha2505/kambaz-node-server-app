@@ -11,6 +11,8 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import AssignmentsRoutes from './Kambaz/Assignments/routes.js';
 import EnrollmentsRoutes from './Kambaz/Enrollments/routes.js';
+import QuizzesRoutes from './Kambaz/Quizzes/routes.js';
+import QuizAttemptsRoutes from './Kambaz/QuizAttempts/routes.js';
 
 const CONNECTION_STRING = process.env.DATABASE_CONNECTION_STRING || "mongodb://localhost:27017/Kambaz"
 mongoose.connect(CONNECTION_STRING);
@@ -89,6 +91,8 @@ CourseRoutes(app);
 ModulesRoutes(app);
 AssignmentsRoutes(app);
 EnrollmentsRoutes(app);
+QuizzesRoutes(app);
+QuizAttemptsRoutes(app);
 Lab5(app);
 Hello(app);
 
